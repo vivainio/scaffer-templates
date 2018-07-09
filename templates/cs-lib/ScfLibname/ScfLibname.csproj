@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Title>scf-libname</Title>
+    <Description>Describe it here</Description>
+    <Authors>scf-nugetauthor</Authors>
+    <Company />
+    <Copyright>scf-gitusername</Copyright>
+    <PackageProjectUrl>scf-gitrepo</PackageProjectUrl>
+    <PackageLicenseUrl>scf-gitrepo/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+
+  </PropertyGroup>
+</Project>
