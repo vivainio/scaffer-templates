@@ -28,17 +28,27 @@ def run(cmd):
     print(">",cmd)
     subprocess.check_call(cmd)
 
-def get_paket_if_needed():
+def get_paket_if_needed(argv):
     if isfile(PAKET_NAME):
         return
     if not isfile(BOOTSTRAP_NAME):
         get_url(BOOTSTRAP_URL, BOOTSTRAP_NAME)
 
-    run([BOOTSTRAP_NAME] + sys.argv[1:])
+    run([BOOTSTRAP_NAME] + argv)
 
 def main():
+
+    restore = False
+    args = sys.argv[1:]
+    if "restore" in args:
+        restore = True
+        args.remove("restore")
+
     os.chdir(paket_dir)
-    get_paket_if_needed()
+
+    get_paket_if_needed(args)
+    if restore:
+        run([PAKET_NAME, "restore"])
 
 
 if __name__ == "__main__":
