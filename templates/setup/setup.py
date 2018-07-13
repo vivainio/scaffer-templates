@@ -1,16 +1,16 @@
 from distutils.core import setup
 
-setup(name='bah',
-      version='0.0.0',
-      description='Blah',
-      author='Bah',
-      author_email='bah@gmail.com',
-      url='https://github.com/',
-      packages=['wpathr'],
-      install_requires=['dep'],
+setup(name='scflibname',
+      version='1.0.0',
+      description='Desciption for scflibname here',
+      author='scf-gitusername',
+      author_email='scf-gitemail',
+      url='scf-gitrepo',
+      packages=['scflibname'],
+      install_requires=[],
       entry_points = {
         'console_scripts': [
-            'bahher = bahher.bahher:main'
+            'scflibname = scflibname.scflibname:main'
         ]
       }
      )
