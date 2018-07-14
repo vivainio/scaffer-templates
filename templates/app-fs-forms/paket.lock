@@ -1,0 +1,6 @@
+RESTRICTION: == net472
+NUGET
+  remote: https://www.nuget.org/api/v2
+    FSharp.Core (4.5)
+    System.ValueTuple (4.5)
+    TrivialBehinds (1.0)
