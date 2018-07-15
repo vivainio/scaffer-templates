@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <ToolCommandName>scf-toolname</ToolCommandName>
+    <PackAsTool>True</PackAsTool>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Authors>scf-nugetauthor</Authors>
+    <Company />
+    <Copyright>scf-gitusername</Copyright>
+    <PackageProjectUrl>scf-gitrepo</PackageProjectUrl>
+    <PackageLicenseUrl>scf-gitrepo/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+
+</Project>
