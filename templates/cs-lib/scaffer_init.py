@@ -15,8 +15,4 @@ def git_data():
 d = git_data()
 scaffer_out.update(d)
 
-scaffer_out["targetdir"] = scaffer_in["target_dir"]
-scaffer_out["libname"] = os.path.basename(scaffer_in["target_dir"])
-
-
 
