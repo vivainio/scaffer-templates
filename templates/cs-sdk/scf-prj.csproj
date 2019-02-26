@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>scf_prj</RootNamespace>
+  </PropertyGroup>
+  <!--
+  <ItemGroup>
+    <Compile Include="../foo/*.cs"/>
+  </ItemGroup>
+  -->
+</Project>
