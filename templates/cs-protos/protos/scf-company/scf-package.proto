@@ -1,0 +1,10 @@
+syntax = "proto3";
+package company.scfpackage;
+
+message PingRequest {
+    string Text = 1;
+}
+
+message PingResponse {
+    string ReplyString = 1;
+}
