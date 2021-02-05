@@ -17,6 +17,7 @@ def do_black(args):
     """ do 'black' reformat of all code """
     c("py -m black scf_prj")
 
+
 def do_test(args):
     os.chdir("test")
     c("pytest")
