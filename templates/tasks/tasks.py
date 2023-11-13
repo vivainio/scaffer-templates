@@ -1,7 +1,7 @@
-""" Simple, fast and fun task runner, not unlike gulp / grunt (but fast, fun and zero dep)"""
-import json
+""" Simple, fast and fun task runner, not unlike gulp / grunt (but zero dep)"""
 import sys
-import subprocess, shutil
+import subprocess
+import shutil
 import os
 import textwrap
 
@@ -9,12 +9,12 @@ PACKAGE = "scf_prj"
 
 
 def do_check(args):
-    """ typecheck, lint etc goes here """
+    """typecheck, lint etc goes here"""
     c("mypy scf_prj")
 
 
 def do_black(args):
-    """ do 'black' reformat of all code """
+    """do 'black' reformat of all code"""
     c("py -m black scf_prj")
 
 
@@ -40,7 +40,7 @@ def c_spawn(cmd, cwd):
 
 
 def copy_files(sources, destinations):
-    """ copy each source to each destinatios """
+    """copy each source to each destinatios"""
     for src in sources:
         for dest in destinations:
             src = os.path.abspath(src)
@@ -81,7 +81,7 @@ def show_help():
 
 
 def main():
-    """ Launcher. Do not modify """
+    """Launcher. Do not modify"""
     if len(sys.argv) < 2:
         default()
         return
