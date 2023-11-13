@@ -9,12 +9,12 @@ PACKAGE = "scflibname"
 
 
 def do_check(args):
-    """ typecheck, lint etc goes here """
+    """typecheck, lint etc goes here"""
     c("mypy scflibname")
 
 
 def do_black(args):
-    """ do 'black' reformat of all code """
+    """do 'black' reformat of all code"""
     c("py -m black scflibname")
 
 
@@ -40,7 +40,7 @@ def c_spawn(cmd, cwd):
 
 
 def copy_files(sources, destinations):
-    """ copy each source to each destinatios """
+    """copy each source to each destinatios"""
     for src in sources:
         for dest in destinations:
             src = os.path.abspath(src)
@@ -81,7 +81,7 @@ def show_help():
 
 
 def main():
-    """ Launcher. Do not modify """
+    """Launcher. Do not modify"""
     if len(sys.argv) < 2:
         default()
         return

@@ -9,7 +9,7 @@ from __future__ import print_function
 
 import urllib
 import os
-from os.path import abspath,dirname, isfile
+from os.path import abspath, dirname, isfile
 import urllib
 import subprocess
 import sys
@@ -20,13 +20,16 @@ BOOTSTRAP_NAME = "paket.bootstrapper.exe"
 PAKET_NAME = "paket.exe"
 BOOTSTRAP_URL = "https://github.com/fsprojects/Paket/releases/download/5.174.2/paket.bootstrapper.exe"
 
+
 def get_url(url, fname):
     print("GET", url)
-    urllib.urlretrieve(url, filename= fname)
+    urllib.urlretrieve(url, filename=fname)
+
 
 def run(cmd):
-    print(">",cmd)
+    print(">", cmd)
     subprocess.check_call(cmd)
+
 
 def get_paket_if_needed(argv):
     if isfile(PAKET_NAME):
@@ -36,8 +39,8 @@ def get_paket_if_needed(argv):
 
     run([BOOTSTRAP_NAME] + argv)
 
-def main():
 
+def main():
     restore = False
     args = sys.argv[1:]
     if "restore" in args:
