@@ -19,7 +19,7 @@ $ scaffer add
 
 ```
 
-Then you can use the templates by going whereever and doing e.g.
+Then you can use the templates by going wherever and doing e.g.
 
 ```
 $ scaffer g mit
