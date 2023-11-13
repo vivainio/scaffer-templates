@@ -3,7 +3,6 @@ from __future__ import print_function
 """ scf_app """
 
 from argparse import ArgumentParser
-import sys
 
 
 def declare_foo_cmd(sub):

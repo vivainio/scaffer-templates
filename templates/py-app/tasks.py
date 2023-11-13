@@ -1,5 +1,4 @@
 """ Simple, fast and fun task runner, not unlike gulp / grunt (but fast, fun and zero dep)"""
-import json
 import sys
 import subprocess, shutil
 import os
