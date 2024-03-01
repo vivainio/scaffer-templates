@@ -1,5 +1,52 @@
 [build-system]
-# These are the assumed default build requirements from pip:
-# https://pip.pypa.io/en/stable/reference/pip/#pep-517-and-518-support
-requires = ["setuptools>=43.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
+requires = ["setuptools", "setuptools-git-versioning"]
+
+[tool.setuptools.packages.find]
+include = ["scf-prj*"]
+
+
+[tool.setuptools-git-versioning]
+enabled = true
+template = "{tag}.{ccount}"
+dev_template = "{tag}.{ccount}"
+dirty_template = "{tag}.{ccount}"
+
+[project]
+name = "scf-prj"
+dynamic = ["version"]
+description = "scf-prj"
+readme = "README.md"
+
+requires-python = ">=3.10"
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+]
+
+[project.scripts]
+anyerplint = "scf-prj.__main__:main"
+
+[tool.ruff]
+target-version = "py310"
+select = ["ALL"]
+ignore = [
+    "COM812",  # Missing trailing comma
+    "D100",  # Missing docstring in public module
+    "D104",  # Missing docstring in public package
+    "D103",  # Missing docstring in public function
+    "E501",  # Line too long
+    "FBT001",  # Boolean-typed positional argument in function definition
+    "ISC001",  # Single-line implicit string concatenation
+]
+
+[tool.pytest.ini_options]
+filterwarnings = "ignore:.*:DeprecationWarning"
+junit_family = "xunit1"
+markers = [
+    "integration: marks tests as integration test (deselect with '-m \"not integration\"')"
+]
