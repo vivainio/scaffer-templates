@@ -6,9 +6,6 @@ import subprocess
 import sys
 import textwrap
 
-PACKAGE = "scf_prj"
-
-
 def do_check(args) -> None:
     """typecheck, lint etc goes here"""
     c("mypy scf_prj")
@@ -39,7 +36,7 @@ def c_spawn(cmd, cwd):
 
 
 def copy_files(sources, destinations):
-    """Copy each source to each destinatios"""
+    """Copy each source to each destination."""
     for src in sources:
         for dest in destinations:
             src = os.path.abspath(src)
