@@ -29,7 +29,7 @@ dependencies = [
 ]
 
 [project.scripts]
-anyerplint = "scf-prj.__main__:main"
+scf-prj = "scf-prj.__main__:main"
 
 [tool.ruff]
 target-version = "py310"
