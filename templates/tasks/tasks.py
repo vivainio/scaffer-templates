@@ -6,14 +6,22 @@ import subprocess
 import sys
 import textwrap
 
+print(sys.executable)
+
+
 def do_check(args) -> None:
     """typecheck, lint etc goes here"""
-    c("mypy scf_prj")
+    c("python mypy scf_prj")
 
 
-def do_black(args) -> None:
-    """Do 'black' reformat of all code"""
-    c("py -m black scf_prj")
+def do_format(args) -> None:
+    """Reformat all code"""
+    c(["ruff", "format", "."])
+
+
+def do_lint(args) -> None:
+    """Check with ruff"""
+    c(["ruff", "check"])
 
 
 def do_test(args) -> None:
@@ -29,39 +37,15 @@ def default() -> None:
 
 emit = print
 
-
-def c_spawn(cmd, cwd):
-    emit(">", cmd)
-    subprocess.Popen(cmd, cwd=cwd, shell=True)
-
-
-def copy_files(sources, destinations):
-    """Copy each source to each destination."""
-    for src in sources:
-        for dest in destinations:
-            src = os.path.abspath(src)
-            dest = os.path.abspath(dest)
-            emit("cp %s -> %s" % (src, dest))
-            if not os.path.isdir(dest):
-                emit("File not found", dest)
-                continue
-            shutil.copy(src, dest)
-
-
-def c(cmd):
-    emit(">", cmd)
-    subprocess.check_call(cmd, shell=True)
-
-
-def c_ignore(cmd):
-    emit(">", cmd)
-    subprocess.call(cmd, shell=True)
-
-
-def c_dir(cmd, dir):
-    emit("%s > %s" % (dir, cmd))
-    subprocess.check_call(cmd, cwd=dir, shell=True)
-
+def c(cmd, check=True, shell=False, cwd=None) -> None:
+    if isinstance(cmd, list):
+        cmdtext = " ".join(cmd)
+    else:
+        cmdtext = cmd
+    if cwd is not None:
+        cmdtext = f"{cwd} > {cmdtext}"
+    emit(">", cmdtext)
+    subprocess.run(cmd, check=check, shell=shell, cwd=cwd)
 
 # scaffolding starts. Do not edit below
 
