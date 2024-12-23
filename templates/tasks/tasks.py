@@ -1,6 +1,8 @@
 """Simple, fast and fun task runner, not unlike gulp / grunt (but zero dep)"""
 
 import os
+from pathlib import Path
+import shlex
 import subprocess
 import sys
 import textwrap
@@ -34,14 +36,14 @@ def default() -> None:
 
 emit = print
 
-def c(cmd, check=True, shell=False, cwd=None) -> None:
-    if isinstance(cmd, list):
-        cmdtext = " ".join(cmd)
-    else:
-        cmdtext = cmd
-    if cwd is not None:
-        cmdtext = f"{cwd} > {cmdtext}"
-    emit(">", cmdtext)
+def c(
+    cmd: list[str | Path] | str, check=True, shell=False, cwd: str | Path | None = None
+) -> None:
+    """ Run a shell command"""
+    cmdtext = shlex.join(str(s) for s in cmd) if isinstance(cmd, list) else cmd
+    cwd_text = f"{cwd} " if cwd else ""
+    cmdtext = f"{cwd_text}> {cmdtext}"
+    emit(cmdtext)
     subprocess.run(cmd, check=check, shell=shell, cwd=cwd)
 
 # scaffolding starts. Do not edit below
