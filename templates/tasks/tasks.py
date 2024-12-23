@@ -1,30 +1,27 @@
 """Simple, fast and fun task runner, not unlike gulp / grunt (but zero dep)"""
 
 import os
-import shutil
 import subprocess
 import sys
 import textwrap
 
-print(sys.executable)
 
-
-def do_check(args) -> None:
+def do_check(_args: list[str]) -> None:
     """typecheck, lint etc goes here"""
     c("python mypy scf_prj")
 
 
-def do_format(args) -> None:
+def do_format(_args: list[str]) -> None:
     """Reformat all code"""
     c(["ruff", "format", "."])
 
 
-def do_lint(args) -> None:
+def do_lint(_args: list[str]) -> None:
     """Check with ruff"""
     c(["ruff", "check"])
 
 
-def do_test(args) -> None:
+def do_test(_args: list[str]) -> None:
     os.chdir("test")
     c("pytest")
 
