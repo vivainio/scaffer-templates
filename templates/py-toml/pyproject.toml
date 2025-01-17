@@ -1,20 +1,13 @@
 [build-system]
 build-backend = "setuptools.build_meta"
-requires = ["setuptools", "setuptools-git-versioning"]
+requires = ["setuptools"]
 
 [tool.setuptools.packages.find]
 include = ["scf-prj*"]
 
-
-[tool.setuptools-git-versioning]
-enabled = true
-template = "{tag}.{ccount}"
-dev_template = "{tag}.{ccount}"
-dirty_template = "{tag}.{ccount}"
-
 [project]
 name = "scf-prj"
-dynamic = ["version"]
+version = "1.0"
 description = "scf-prj"
 readme = "README.md"
 
