@@ -39,7 +39,7 @@ def do_test(_args: list[str]) -> None:
 
 
 def default() -> None:
-    show_help()
+    _show_help()
 
 
 # library functions here (or in own module, whatever, I don't care)
@@ -86,12 +86,18 @@ def _discover_tasks():
     return {t[3:]: f for (t, f) in all_tasks_dict.items() if t.startswith("do_")}
 
 
-def show_help() -> None:
+def _task_by_index(index: int):
+    task_names = list(_discover_tasks().keys())
+    task_names.sort()
+    return task_names[index - 1]
+
+
+def _show_help() -> None:
     tasks = list(_discover_tasks().items())
     tasks.sort()
 
-    for name, func in tasks:
-        nametext = name + ":"
+    for index, (name, func) in enumerate(tasks):
+        nametext = f"{index+1:<2} {name}:"
 
         if _is_argparse_function(func):
             parser = _collect_args_from_argparse_function(func)
@@ -108,6 +114,9 @@ def main() -> None:
         default()
         return
     task_name = sys.argv[1]
+    if task_name.isdigit():
+        task_name = _task_by_index(int(task_name))
+
     task_function = _discover_tasks().get(task_name)
     if task_function:
         if _is_argparse_function(task_function):
@@ -127,7 +136,7 @@ def main() -> None:
         )
         return
     if not task_function:
-        show_help()
+        _show_help()
         return
 
 
