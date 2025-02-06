@@ -8,6 +8,14 @@ import sys
 import textwrap
 from argparse import ArgumentParser, Namespace
 import inspect
+from types import ModuleType
+
+import extra_tasks.task_samples
+
+# add tasks from other modules by adding modules to TASK_MODULES list
+# if you don't need them, just leave this list empty
+
+TASK_MODULES: list[ModuleType] = [extra_tasks.task_samples]
 
 
 def do_check(_args: list[str]) -> None:
@@ -28,14 +36,6 @@ def do_lint(_args: list[str]) -> None:
 def do_test(_args: list[str]) -> None:
     os.chdir("test")
     c("pytest")
-
-
-def do_complex(_args: Namespace) -> ArgumentParser | None:
-    if _args is None:
-        parser = ArgumentParser(description="Complex fn")
-        parser.add_argument("--foo", type=int, required=True, help="foo help")
-        return parser
-    print("Complex fn called with", _args)
 
 
 def default() -> None:
@@ -78,14 +78,19 @@ def _collect_args_from_argparse_function(f) -> ArgumentParser:
     return parser
 
 
+def _discover_tasks():
+    all_tasks_dict = globals().copy()
+    for mod in TASK_MODULES:
+        all_tasks_dict.update(mod.__dict__)
+
+    return {t[3:]: f for (t, f) in all_tasks_dict.items() if t.startswith("do_")}
+
+
 def show_help() -> None:
-    g = globals()
-    funcs = [(n[3:], f) for (n, f) in g.items() if n.startswith("do_")]
-    funcs.sort()
-    emit(
-        "Command not found. Try one of these:",
-    )
-    for name, func in funcs:
+    tasks = list(_discover_tasks().items())
+    tasks.sort()
+
+    for name, func in tasks:
         nametext = name + ":"
 
         if _is_argparse_function(func):
@@ -102,26 +107,26 @@ def main() -> None:
     if len(sys.argv) < 2:
         default()
         return
-    func = sys.argv[1]
-    f = globals().get("do_" + func)
-    if f:
-        if _is_argparse_function(f):
-            parser = _collect_args_from_argparse_function(f)
+    task_name = sys.argv[1]
+    task_function = _discover_tasks().get(task_name)
+    if task_function:
+        if _is_argparse_function(task_function):
+            parser = _collect_args_from_argparse_function(task_function)
             args = parser.parse_args(sys.argv[2:])
-            f(args)
+            task_function(args)
             return
         else:
-            f(sys.argv[2:])
+            task_function(sys.argv[2:])
             return
 
     if sys.argv[-1] == "-h":
         emit(
-            textwrap.dedent(f.__doc__).strip()
-            if f.__doc__
+            textwrap.dedent(task_function.__doc__).strip()
+            if task_function.__doc__
             else "No documentation for this command",
         )
         return
-    if not f:
+    if not task_function:
         show_help()
         return
 
